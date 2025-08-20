@@ -1,0 +1,739 @@
+Sub Isk_UC_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Uppercase
+    Case vbNo
+        Isk_Uppercase
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Uppercase()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    cell.Value = UCase(cell.Value)
+Next cell
+End Sub
+
+Sub Isk_allText_Uppercase()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        cell.Value = UCase(cell.Value)
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_LC_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Lowercase
+    Case vbNo
+        Isk_Lowercase
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Lowercase()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    cell.Value = LCase(cell.Value)
+Next cell
+End Sub
+
+Sub Isk_allText_Lowercase()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        cell.Value = LCase(cell.Value)
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_PC_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Propercase
+    Case vbNo
+        Isk_Propercase
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Propercase()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    cell.Value = WorksheetFunction.Proper(cell.Value)
+Next cell
+End Sub
+
+Sub Isk_allText_Propercase()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        cell.Value = WorksheetFunction.Proper(cell.Value)
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_SC_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Sentencecase
+    Case vbNo
+        Isk_Sentencecase
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Sentencecase()
+Dim leftText As String
+Dim rightText As String
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    leftText = UCase(Left(cell.Value, 1))
+    rightText = LCase(Right(cell.Value, Len(cell.Value) - 1))
+    cell.Value = leftText & rightText
+Next cell
+End Sub
+
+Sub Isk_allText_Sentencecase()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        leftText = UCase(Left(cell.Value, 1))
+        rightText = LCase(Right(cell.Value, Len(cell.Value) - 1))
+        cell.Value = leftText & rightText
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_Trim_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Trim
+    Case vbNo
+        Isk_Trim
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Trim()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    cell.Value = WorksheetFunction.Trim(cell.Value)
+Next cell
+End Sub
+
+Sub Isk_allText_Trim()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        cell.Value = WorksheetFunction.Trim(cell.Value)
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_NumberText_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allNumber_NumberText
+    Case vbNo
+        Isk_NumberText
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_NumberText()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    If cell <> "" And IsNumeric(cell) Then ' Checking for NUMERIC data only
+        cell.Value = "'" & cell.Value
+    End If
+Next cell
+End Sub
+
+Sub Isk_allNumber_NumberText()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And IsNumeric(cell) Then ' Checking for NUMERIC data only
+        cell.Value = "'" & cell.Value
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_TextNumber_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allNumber_TextNumber
+    Case vbNo
+        Isk_TextNumber
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_TextNumber()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    If cell <> "" And IsNumeric(cell) Then ' Checking for NUMERIC data only
+        cell.Value = Val(cell.Value)
+    End If
+Next cell
+End Sub
+
+Sub Isk_allNumber_TextNumber()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And IsNumeric(cell) Then ' Checking for NUMERIC data only
+        cell.Value = Val(cell.Value)
+'    ElseIf cell <> "" And IsDate(cell) Then ' Checking for DATE data only
+'        Debug.Print "Date data in " & cell.Address & " is " & cell.Value
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_FormulaNumber()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+Range(startCell, endCell).Select
+Selection.Copy
+Selection.PasteSpecial (xlPasteValuesAndNumberFormats)
+Application.CutCopyMode = False
+End Sub
+
+Sub Isk_RandNRIC()
+Dim yrStr As String
+Dim mtStr As String
+Dim dyStr As String
+Dim stStr As String
+Dim idStr As String
+For Each cell In Selection
+    yrStr = Right(WorksheetFunction.RandBetween(1957, 2020), 2)
+    mtStr = WorksheetFunction.Text(WorksheetFunction.RandBetween(1, 12), "00")
+    dyStr = WorksheetFunction.Text(WorksheetFunction.RandBetween(1, 28), "00")
+    stStr = WorksheetFunction.Text(WorksheetFunction.RandBetween(1, 14), "00")
+    idStr = WorksheetFunction.Text(WorksheetFunction.RandBetween(1, 9999), "0000")
+    cell.Value = "'" & yrStr & mtStr & dyStr & stStr & idStr
+Next cell
+Columns.AutoFit
+End Sub
+
+Sub Isk_ExtractDOB()
+Dim columnCount As Integer
+Dim startCell As Range
+Dim endCell As Range
+columnCount = ActiveSheet.UsedRange.Columns.Count
+Set startCell = ActiveCell.End(xlUp).Offset(1, 0)
+Set endCell = startCell.End(xlDown)
+Cells(startCell.Row - 1, columnCount + 1).Value = "DOB"
+Dim yrNRIC As String
+Dim mtNRIC As String
+Dim dyNRIC As String
+For Each cell In Range(startCell, endCell)
+    yrNRIC = WorksheetFunction.Text(Left(cell.Value, 2), "00")
+    mtNRIC = WorksheetFunction.Text(Mid(cell.Value, 3, 2), "00")
+    dyNRIC = WorksheetFunction.Text(Mid(cell.Value, 5, 2), "00")
+    Cells(cell.Row, columnCount + 1).Value = DateValue(dyNRIC & "-" & mtNRIC & "-" & yrNRIC)
+Next cell
+Columns.AutoFit
+End Sub
+
+Sub Isk_NameofDay()
+On Error Resume Next
+Dim columnCount As Integer
+Dim startCell As Range
+Dim endCell As Range
+Dim dataState As Boolean
+columnCount = ActiveSheet.UsedRange.Columns.Count
+Set startCell = ActiveCell.End(xlUp).Offset(1, 0)
+Set endCell = startCell.End(xlDown)
+Cells(startCell.Row - 1, columnCount + 1).Value = "Day Name"
+dataState = False
+'Range(startCell, endCell).Select
+For Each cell In Range(startCell, endCell)
+    If cell <> "" And IsDate(cell) Then ' Checking for DATE data only
+        Cells(cell.Row, columnCount + 1).Value = WorksheetFunction.Text(cell.Value, "dddd")
+    Else
+        dataState = True
+    End If
+Next cell
+If dataState Then MsgBox "Please ensure correct DATE datatype"
+Columns.AutoFit
+End Sub
+
+Sub Isk_Age()
+On Error Resume Next
+Dim columnCount As Integer
+Dim startCell As Range
+Dim endCell As Range
+Dim dataState As Boolean
+columnCount = ActiveSheet.UsedRange.Columns.Count
+Set startCell = ActiveCell.End(xlUp).Offset(1, 0)
+Set endCell = startCell.End(xlDown)
+Cells(startCell.Row - 1, columnCount + 1).Value = "Age"
+dataState = False
+'Range(startCell, endCell).Select
+For Each cell In Range(startCell, endCell)
+    If cell <> "" And IsDate(cell) Then ' Checking for DATE data only
+        Cells(cell.Row, columnCount + 1).Value = Year(Now) - Year(cell.Value)
+    Else
+        dataState = True
+    End If
+Next cell
+If dataState Then MsgBox "Please ensure correct DATE datatype"
+Columns.AutoFit
+End Sub
+
+Sub Isk_Autofit()
+Columns.AutoFit
+End Sub
+
+Sub Isk_DefaultWidth()
+Columns.ColumnWidth = 8.43
+End Sub
+
+Sub Isk_Width2()
+Columns.ColumnWidth = 2
+End Sub
+
+Sub Isk_ReportPages()
+Application.ScreenUpdating = False
+Dim startCell As Range
+Dim endCell As Range
+Dim dataRange As Range
+Dim activecellColumn As Integer
+Dim regionStartColumn As Integer
+Dim arr1() As Variant
+Dim ws As Worksheet
+Set startCell = ActiveCell.End(xlUp).Offset(1, 0)
+Set endCell = startCell.End(xlDown)
+Set dataRange = ActiveCell.CurrentRegion
+activecellColumn = ActiveCell.Column
+regionStartColumn = dataRange.Columns.Column
+arr1 = WorksheetFunction.Unique(Range(startCell, endCell))
+For Each Item In arr1
+    Set ws = Sheets.Add(After:=ActiveSheet)
+    ws.Name = Item
+    dataRange.Copy
+    ActiveCell.PasteSpecial (xlPasteAll)
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    Selection.AutoFilter
+    Selection.AutoFilter Field:=activecellColumn - regionStartColumn + 1, Criteria1:=Item
+    Columns.AutoFit
+    Selection.End(xlUp).End(xlToLeft).Select
+Next Item
+Application.ScreenUpdating = True
+End Sub
+
+Sub Isk_KeepThisSheetOnly()
+For Each ws In Worksheets
+    If ws.Name <> ActiveSheet.Name Then
+        Application.DisplayAlerts = False
+        ws.Delete
+        Application.DisplayAlerts = True
+    End If
+Next ws
+End Sub
+
+Sub Isk_ShowThisSheetOnly()
+For Each ws In Worksheets
+    If ws.Name <> ActiveSheet.Name Then
+        ws.Visible = xlSheetHidden
+    End If
+Next ws
+End Sub
+
+Sub Isk_ShowAllSheets()
+For Each ws In Worksheets
+    ws.Visible = xlSheetVisible
+Next ws
+End Sub
+
+Sub Isk_PDF()
+ActiveSheet.ExportAsFixedFormat _
+    Type:=xlTypePDF, _
+    Filename:=Application.GetSaveAsFilename(FileFilter:="PDF Files (*.pdf), *.pdf"), _
+    IncludeDocProperties:=True, _
+    IgnorePrintAreas:=False, _
+    Openafterpublish:=False
+End Sub
+
+Sub Isk_TOC()
+Dim flag1 As Boolean
+Dim flag2 As Integer
+Dim ws As Worksheet
+Dim i As Integer
+flag1 = False
+For Each ws In Worksheets
+    If ws.Name = "TOC" Then
+'        Debug.Print "TOC existed"
+        flag1 = True
+        Exit For
+    End If
+Next ws
+If flag1 Then
+    flag2 = MsgBox("TOC existed. Do you want to re-create TOC?", vbYesNo)
+    If flag2 = vbYes Then
+        Sheets("TOC").UsedRange.Clear
+        With Sheets("TOC").Cells(1, 1)
+            .Value = "Table of Contents"
+            .Font.Bold = True
+            .Font.Color = vbBlue
+        End With
+        For i = 2 To Worksheets.Count
+            Sheets("TOC").Cells(i, 1).Value = Worksheets(i).Name
+            Sheets("TOC").Cells(i, 1).Hyperlinks.Add _
+                Anchor:=Sheets("TOC").Cells(i, 1), _
+                Address:="", _
+                SubAddress:="'" & Worksheets(i).Name & "'!A1"
+        Next i
+    Else
+        Exit Sub
+    End If
+Else
+    Set ws = Sheets.Add(Before:=Sheets(1))
+    ws.Name = "TOC"
+    With Sheets("TOC").Cells(1, 1)
+        .Value = "Table of Contents"
+        .Font.Bold = True
+        .Font.Color = vbBlue
+    End With
+    For i = 2 To Worksheets.Count
+        Sheets("TOC").Cells(i, 1).Value = Worksheets(i).Name
+        Sheets("TOC").Cells(i, 1).Hyperlinks.Add _
+            Anchor:=Sheets("TOC").Cells(i, 1), _
+            Address:="", _
+            SubAddress:="'" & Worksheets(i).Name & "'!A1"
+    Next i
+End If
+End Sub
+
+Sub Isk_ShowAllCells()
+Columns.EntireColumn.Hidden = False
+Rows.EntireRow.Hidden = False
+End Sub
+
+Sub Isk_LimitedScroll()
+ActiveSheet.ScrollArea = Selection.Address
+End Sub
+
+Sub Isk_FreeScroll()
+ActiveSheet.ScrollArea = ""
+End Sub
+
+Sub Isk_Clean_Selection()
+Dim i As Integer
+i = MsgBox("Where do you want to apply this transformation?" & vbCrLf _
+& "Yes - ENTIRE RECORD" & vbCrLf _
+& "No - THIS COLUMN", vbYesNoCancel)
+Select Case i
+    Case vbYes
+        Isk_allText_Clean
+    Case vbNo
+        Isk_Clean
+    Case Else
+        Exit Sub
+End Select
+End Sub
+
+Sub Isk_Clean()
+Dim startCell As Range
+Dim endCell As Range
+Set startCell = ActiveCell.End(xlUp)
+Set endCell = startCell.End(xlDown)
+For Each cell In Range(startCell, endCell)
+    cell.Value = WorksheetFunction.Clean(cell.Value)
+Next cell
+End Sub
+
+Sub Isk_allText_Clean()
+ActiveSheet.UsedRange.Select
+For Each cell In Selection
+    If cell <> "" And _
+    IsNumeric(cell) = False And _
+    IsDate(cell) = False Then ' Checking for TEXT data only
+        cell.Value = WorksheetFunction.Clean(cell.Value)
+    End If
+Next cell
+ActiveSheet.UsedRange.End(xlUp).End(xlToLeft).Select
+Columns.AutoFit
+End Sub
+
+Sub Isk_ColumnChart()
+On Error Resume Next
+Dim myChart As ChartObject
+If ActiveSheet.ChartObjects.Count < 1 Then Exit Sub
+For Each myChart In ActiveSheet.ChartObjects
+    With myChart
+        If .Chart.ChartType = 51 Then
+            .Chart.ShowAllFieldButtons = False
+            .Chart.Legend.Delete
+            .Chart.SetElement (msoElementDataLabelInsideBase)
+            .Chart.ApplyDataLabels
+            .Width = WorksheetFunction.MRound(300, 15)
+            .Height = WorksheetFunction.MRound(300, 14.4)
+            .Placement = xlFreeFloating
+            .Chart.ChartGroups(1).VaryByCategories = True
+            With .Chart.FullSeriesCollection(1)
+                .DataLabels.Orientation = xlUpward
+                .DataLabels.Format.TextFrame2.Orientation = msoTextOrientationUpward
+                .DataLabels.Format.TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(255, 255, 255)
+                .DataLabels.Format.TextFrame2.TextRange.Font.Bold = True
+                .Format.Shadow.Type = msoShadow21
+            End With
+            With .Chart.Axes(xlValue)
+                .ScaleType = xlLogarithmic
+                .MajorGridlines.Delete
+                .Delete
+            End With
+            With .Chart.ChartArea.Format.Shadow
+                .Blur = 10
+                .OffsetX = 5
+                .OffsetY = 5
+                .Transparency = 0.65
+            End With
+        End If
+    End With
+Next myChart
+End Sub
+
+Sub Isk_BarChart()
+On Error Resume Next
+Dim myChart As ChartObject
+If ActiveSheet.ChartObjects.Count < 1 Then Exit Sub
+For Each myChart In ActiveSheet.ChartObjects
+    With myChart
+        If .Chart.ChartType = 57 Then
+            .Chart.ShowAllFieldButtons = False
+            .Chart.Legend.Delete
+            .Chart.SetElement (msoElementDataLabelInsideBase)
+            .Chart.ApplyDataLabels
+            .Width = WorksheetFunction.MRound(300, 15)
+            .Height = WorksheetFunction.MRound(300, 14.4)
+            .Placement = xlFreeFloating
+            .Chart.ChartGroups(1).VaryByCategories = True
+            With .Chart.FullSeriesCollection(1)
+'                .DataLabels.Orientation = xlUpward
+'                .DataLabels.Format.TextFrame2.Orientation = msoTextOrientationUpward
+                .DataLabels.Format.TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(255, 255, 255)
+                .DataLabels.Format.TextFrame2.TextRange.Font.Bold = True
+                .Format.Shadow.Type = msoShadow21
+            End With
+            With .Chart.Axes(xlValue)
+                .ScaleType = xlLogarithmic
+                .MajorGridlines.Delete
+                .Delete
+            End With
+            With .Chart.ChartArea.Format.Shadow
+                .Blur = 10
+                .OffsetX = 5
+                .OffsetY = 5
+                .Transparency = 0.65
+            End With
+        End If
+    End With
+Next myChart
+End Sub
+
+Sub Isk_PieChart()
+On Error Resume Next
+Dim myChart As ChartObject
+If ActiveSheet.ChartObjects.Count < 1 Then Exit Sub
+For Each myChart In ActiveSheet.ChartObjects
+    With myChart
+        If .Chart.ChartType = 5 Then
+            .Chart.ShowAllFieldButtons = False
+            .Chart.Legend.Delete
+            .Chart.SetElement (msoElementDataLabelInsideEnd)
+            .Chart.ApplyDataLabels
+            .Width = WorksheetFunction.MRound(300, 15)
+            .Height = WorksheetFunction.MRound(300, 14.4)
+            .Placement = xlFreeFloating
+            .Chart.ChartGroups(1).VaryByCategories = True
+            With .Chart.FullSeriesCollection(1)
+'                .DataLabels.Orientation = xlUpward
+'                .DataLabels.Format.TextFrame2.Orientation = msoTextOrientationUpward
+                .DataLabels.Format.TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(255, 255, 255)
+                .DataLabels.Format.TextFrame2.TextRange.Font.Bold = True
+                .DataLabels.ShowCategoryName = True
+                .DataLabels.Separator = "" & Chr(13) & ""
+                .Format.Shadow.Type = msoShadow21
+            End With
+            With .Chart.ChartArea.Format.Shadow
+                .Blur = 10
+                .OffsetX = 5
+                .OffsetY = 5
+                .Transparency = 0.65
+            End With
+        End If
+    End With
+Next myChart
+End Sub
+
+Sub Isk_LineChart()
+On Error Resume Next
+Dim myChart As ChartObject
+Dim mcsd As Series
+mcsd
+If ActiveSheet.ChartObjects.Count < 1 Then Exit Sub
+For Each myChart In ActiveSheet.ChartObjects
+    With myChart
+        If .Chart.ChartType = 65 Or .Chart.ChartType = 4 Then
+            .Chart.ShowAllFieldButtons = False
+            .Chart.Legend.Delete
+'            .Chart.SetElement (msoElementDataLabelInsideBase)
+'            .Chart.ApplyDataLabels
+            .Width = WorksheetFunction.MRound(500, 15)
+            .Height = WorksheetFunction.MRound(200, 14.4)
+            .Placement = xlFreeFloating
+'            .Chart.ChartGroups(1).VaryByCategories = True
+            With .Chart.FullSeriesCollection(1)
+'                .DataLabels.Orientation = xlUpward
+'                .DataLabels.Format.TextFrame2.Orientation = msoTextOrientationUpward
+'                .DataLabels.Format.TextFrame2.TextRange.Font.Fill.ForeColor.RGB = RGB(255, 255, 255)
+'                .DataLabels.Format.TextFrame2.TextRange.Font.Bold = True
+                .MarkerStyle = -4105
+                .MarkerBackgroundColor = RGB(255, 255, 0)
+                .MarkerForegroundColor = RGB(255, 0, 0)
+                .Format.Shadow.Type = msoShadow21
+            End With
+            With .Chart.Axes(xlValue)
+                .ScaleType = xlLogarithmic
+                .MajorGridlines.Delete
+                .Delete
+            End With
+            .Chart.Axes(xlCategory).Delete
+            With .Chart.ChartArea.Format.Shadow
+                .Blur = 10
+                .OffsetX = 5
+                .OffsetY = 5
+                .Transparency = 0.65
+            End With
+        End If
+    End With
+Next myChart
+End Sub
+
+
+
+
+
+
+
